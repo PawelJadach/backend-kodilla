@@ -1,30 +1,23 @@
 const express = require('express');
-const path = require('path');
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+const testimonialsRoutes = require('./routes/testimonials.routes');
+const seatsRoutes = require('./routes/seats.routes');
+const concertsRoutes = require('./routes/concerts.routes');
 
-const db = [
-  { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
-  { id: 2, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
-];
+app.use('/api', testimonialsRoutes);
+app.use('/api', seatsRoutes);
+app.use('/api', concertsRoutes);
 
-app.get('/testimonials', (req, res) => {
-  res.json(db);
-});
 
-app.get('/testimonials/random', (req, res) => {
-  res.json(db[Math.floor(Math.random() * 2)]);
+
+
+app.use((req, res) => {
+  res.status(404).json({message: 'Not found'});
 })
-
-app.get('/testimonials/:id', (req, res) => {
-  const testimonial = db.find(testimonial => testimonial.id === Number(req.params.id))
-  res.json(testimonial);
-})
-
-
 
 
 app.listen(8000, () => {
