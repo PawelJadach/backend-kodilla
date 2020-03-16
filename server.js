@@ -15,11 +15,16 @@ app.get('/testimonials', (req, res) => {
   res.json(db);
 });
 
+app.get('/testimonials/random', (req, res) => {
+  res.json(db[Math.floor(Math.random() * 2)]);
+})
+
 app.get('/testimonials/:id', (req, res) => {
-  // console.log(req.params.id)
   const testimonial = db.find(testimonial => testimonial.id === Number(req.params.id))
   res.json(testimonial);
 })
+
+
 
 
 app.listen(8000, () => {
