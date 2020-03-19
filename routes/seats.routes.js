@@ -47,5 +47,4 @@ router.route('/seats/:id').put((req, res) => {
   res.json({message: 'OK' });
 })
 
-
 module.exports = router;
