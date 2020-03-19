@@ -3,6 +3,9 @@ const router = express.Router();
 const db = require('../db');
 const { v4 } = require('uuid');
 
+
+
+
 router.route('/seats').get((req, res) => {
   res.json(db.seats);
 });
@@ -25,6 +28,7 @@ router.route('/seats').post((req, res) => {
     else {
       db.seats.push(seat)
       res.json({message: 'OK', seat});
+      req.io.emit('seatsUpdated', db.seats);
     }
   } else res.status(404).json({message: 'Error'});
 });
