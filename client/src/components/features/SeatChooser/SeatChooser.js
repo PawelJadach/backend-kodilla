@@ -12,15 +12,14 @@ class SeatChooser extends React.Component {
     reserved: 0,
   }
 
-  
-
   componentDidMount() {
-    const port = '8000';
-    this.socket = io();
-    if(!this.socket) this.socket = io(`http://localhost:${port}`);
+    //this.socket = io();
+    this.socket = io(`http://localhost:8000`);
     const { loadSeats, loadSeatsData } = this.props;
     loadSeats();
-    this.socket.on('seatsUpdated', (seats) => loadSeatsData(seats));
+    this.socket.on('seatsUpdated', (seats) => {
+      loadSeatsData(seats)
+    });
   }
 
 

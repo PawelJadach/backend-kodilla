@@ -34,7 +34,7 @@ export const loadConcertsRequest = () => {
       let res = await axios.get(`${API_URL}/concerts`);
       dispatch(loadConcerts(res.data));
       dispatch(endRequest());
-
+      console.log(res.data)
     } catch(e) {
       dispatch(errorRequest(e.message));
     }
