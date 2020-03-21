@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const testimonialSchema = new mongoose.Schema({
-  performer: { String, required: true, ref: 'Performer'},
-  text: { String, required: true}
+  performer: { type: String, required: true, ref: 'Performer'},
+  text: { type: String, required: true}
 })
 
 

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const concertSchema = new mongoose.Schema({
-  performer: { String, required: true, ref: 'Performer'},
-  price: { Number, required: true },
-  day: { Number, required: true },
-  image: { String, required: true}
+  performer: { type: String, required: true, ref: 'Performer'},
+  price: { type: Number, required: true },
+  day: { type: Number, required: true },
+  image: { type: String, required: true}
 })
 
 

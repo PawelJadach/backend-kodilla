@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const performerSchema = new mongoose.Schema({
-  name: { String, required: true},
-  genre: { String, required: true},
+  name: { type: String, required: true},
+  genre: { type: String, required: true},
 })
 
 
