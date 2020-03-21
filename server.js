@@ -39,21 +39,6 @@ const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log('New Connect');
-  // socket.emit('updateData', tasks);
-  
-  // socket.on('addTask', (task) => {
-  //   tasks.push(task);
-  //   socket.broadcast.emit('addTask', task);
-  // });
-
-  // socket.on('removeTask', (id) => {
-  //   tasks.splice(tasks.findIndex(task => task.id === id), 1);
-  //   socket.broadcast.emit('removeTask', id);
-  // });
-
-  // socket.on('editTask', (newName, id) => {
-  //   tasks[tasks.findIndex(task => task.id === id)].name = newName;
-  //   socket.broadcast.emit('editTask', newName, id);
-  });
+});
 
 
