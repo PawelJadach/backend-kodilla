@@ -33,6 +33,7 @@ app.use((req, res) => {
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
+  console.log(app.settings)
 });
 
 const io = socket(server);
