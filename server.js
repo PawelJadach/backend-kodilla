@@ -23,13 +23,6 @@ app.use('/api', testimonialsRoutes);
 app.use('/api', seatsRoutes);
 app.use('/api', concertsRoutes);
 
-// const uri = "mongodb+srv://pawel12345:admin12345@ticket-app-cluster-jtqb0.mongodb.net/test?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true , useUnifiedTopology: true });
-// MongoClient.connect(uri, { dbName: 'newWaveDB', useNewUrlParser: true , useUnifiedTopology: true })
-//   .then( () => {
-//     console.log('Connection to the Atlas Cluster is successful!')
-//   })
-//   .catch( (err) => console.error(err));
 
 mongoose.connect('mongodb+srv://pawel12345:admin12345@ticket-app-cluster-jtqb0.mongodb.net/test?retryWrites=true&w=majority', { dbName: 'newWaveDB', useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
