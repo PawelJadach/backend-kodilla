@@ -1,4 +1,5 @@
 const Concert = require('../models/concert.model');
+const Performer = require('../models/performers.model');
 
 exports.getAll =  async (req, res) => {
   try {
@@ -57,3 +58,60 @@ exports.updateById = async (req, res) => {
     res.status(500).json({ message: err });
   }
 };
+
+exports.getConcertsByPerformerId = async (req, res) => {
+  const id = req.params.performer;
+  try {
+    const performer = await Performer.findById(id);
+    if(!performer) res.status(400).json({ message: 'Bad request' });
+    const concerts = await Concert.find({ performer: id})
+    if(!concerts) res.status(400).json({ message: 'Not found' });
+    res.json(concerts);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+}
+
+exports.getConcertsByGenre = async (req, res) => {
+  const genre = req.params.genre;
+  try {
+    const concerts = await Concert.find().populate('performer');
+    const filteredByGenreConcerts = concerts.filter(concert => concert.performer.genre === genre);
+    if(!filteredByGenreConcerts) res.status(400).json({ message: 'Not found' });
+    res.json(filteredByGenreConcerts);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+}
+
+exports.getConcertsByPrice = async (req, res) => {
+  const max = Number(req.params.price_max);
+  const min = Number(req.params.price_min);
+  try {
+    if(typeof min !== 'number' || typeof max !== 'number') res.status(400).json({ message: 'Bad request' });
+    else {
+      const concerts = await Concert.find();
+      const filteredByPriceConcerts = concerts.filter(concert => concert['price'] >= min && concert['price'] <= max);
+      if(filteredByPriceConcerts.length < 1) res.status(400).json({ message: 'Not found' });
+      else res.json(filteredByPriceConcerts);
+    }
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+}
+
+exports.getConcertsByDay = async (req, res) => {
+  const day = Number(req.params.day);
+  try {
+    if(typeof day !== 'number') res.status(400).json({ message: 'Bad request' });
+    else {
+      const concerts = await Concert.find();
+      const filteredByPriceDay = concerts.filter(concert => concert['day'] === day);
+      if(filteredByPriceDay.length < 1) res.status(400).json({ message: 'Not found' });
+      else res.json(filteredByPriceDay);
+    }
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+}
+
