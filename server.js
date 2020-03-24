@@ -24,12 +24,14 @@ app.use('/api', seatsRoutes);
 app.use('/api', concertsRoutes);
 
 
-mongoose.connect('mongodb+srv://pawel12345:admin12345@ticket-app-cluster-jtqb0.mongodb.net/test?retryWrites=true&w=majority', { dbName: 'newWaveDB', useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.once('open', () => {
-  console.log('Connected to the database');
-});
-db.on('error', err => console.log('Error ' + err));
+// mongoose.connect('mongodb+srv://pawel12345:admin12345@ticket-app-cluster-jtqb0.mongodb.net/test?retryWrites=true&w=majority', { dbName: 'newWaveDB', useNewUrlParser: true, useUnifiedTopology: true });
+// const db = mongoose.connection;
+// db.once('open', () => {
+//   console.log('Connected to the database');
+// });
+// db.on('error', err => console.log('Error ' + err));
+
+mongoose.connect('mongodb://localhost:27017/newWaveDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
@@ -49,3 +51,5 @@ const io = socket(server);
 io.on('connection', function (socket) {
   console.log('New connect!')
 });
+
+module.exports = server;
