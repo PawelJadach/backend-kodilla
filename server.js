@@ -24,7 +24,7 @@ app.use('/api', testimonialsRoutes);
 app.use('/api', seatsRoutes);
 app.use('/api', concertsRoutes);
 
-mongoose.connect(dbString.dbString || process.env.dbString, { dbName: 'newWaveDB', useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.dbString || dbString.dbString, { dbName: 'newWaveDB', useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.once('open', () => {
   console.log('Connected to the database');
