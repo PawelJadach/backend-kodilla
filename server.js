@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
-const dbString = require('./private/config');
+// const dbString = require('./private/config');
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
