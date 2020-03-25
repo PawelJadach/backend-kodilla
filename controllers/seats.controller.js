@@ -1,4 +1,5 @@
 const Seat = require('../models/seat.model');
+var sanitize = require('mongo-sanitize');
 
 exports.getAll =  async (req, res) => {
   try {
@@ -19,7 +20,7 @@ exports.getById =  async (req, res) => {
 };
 
 exports.post = async (req, res) => {
-  const { day, seat, email, client } = req.body;
+  const { day, seat, email, client } = sanitize(req.body);
   try {
     const seatResered = await Seat.findOne({ day: day, seat: seat});
     if(seatResered) res.json({ message: 'Slot is already reserved...'})
