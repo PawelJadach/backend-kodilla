@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const dbString = require('./private/config');
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -24,7 +25,7 @@ app.use('/api', seatsRoutes);
 app.use('/api', concertsRoutes);
 
 
-mongoose.connect('mongodb+srv://pawel12345:admin12345@ticket-app-cluster-jtqb0.mongodb.net/test?retryWrites=true&w=majority', { dbName: 'newWaveDB', useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbString || process.env.dbString, { dbName: 'newWaveDB', useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.once('open', () => {
   console.log('Connected to the database');
